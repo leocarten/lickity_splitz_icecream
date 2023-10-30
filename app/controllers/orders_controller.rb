@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-    def create
+    def create #Should work
         @order = Order.new(order_params)
         @order.list_food_id = order_params[:list_food_id].to_json
         @order.list_food_notes = order_params[:list_food_notes].to_json
