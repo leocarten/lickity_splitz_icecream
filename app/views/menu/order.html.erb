@@ -10,28 +10,19 @@
   </div>
 </div>
 
-<%
-=begin%>
- <h1>Welcome <%= session[:customer].first_name %>!!</h1> 
-<%
-=end%>
-
-
 <% if !@foods.blank? %>
   <% @foods.each do |fooditem| %>
-    <%= fooditem.food_name %>
-    <%= form_with(model: TempOrder.new, method: :post) do |form| %>
-            <%= form.hidden_field :customer_id, value: session[:customer].id %>
-            <%= form.hidden_field :food_id, value: fooditem.id %>
-            <%= form.hidden_field :total_cost, value: fooditem.inital_cost %>
-            <%= form.text_field :food_modifications, value: fooditem %>
-            <%= form.submit "Add", class: "btn btn-primary" %>
-    <% end %>
-    <% data = eval(fooditem.food_additions) rescue [] %>
-    <% additions = data.is_a?(Array) ? data : [data] %>
-    <% additions.each do |addition| %>
-      <h4>ID: <%= addition['id'] %>, Name: <%= addition['addition_name'] %>, Cost: <%= addition['cost'] %></h4>
-    <% end %>
+    <div class="food-item">
+      <h2><%= fooditem.food_name %></h2>
+      <p>Initial Cost: <%= number_to_currency(fooditem.inital_cost) %></p>
+      <%= link_to "View Details", menu_show_path(fooditem), class: "btn btn-primary" %>
+      
+    </div>
   <% end %>
 <% end %>
+<br>
+<br>
+<br>
+<br>
+
 <%= link_to "Show Results", order_confirmation_path, class: "btn btn-primary" %>
