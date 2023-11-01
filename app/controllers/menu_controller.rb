@@ -9,8 +9,12 @@ class MenuController < ApplicationController
     end
 
     def orderingMenu
+        postedElements = "0"
         @lunchAndDinnerMenu = Food.where(breakfastOrDinner: "0")
         @breakfastMenu = Food.where(breakfastOrDinner: "1")
+        #This will change true or false depending if breakfast or lunch was clicked
+        @isBreakfastMenu = postedElements == "1"
+        puts @isBreakfastMenu
     end
 
     def confirmation

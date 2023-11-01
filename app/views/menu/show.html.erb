@@ -6,13 +6,11 @@
         <%= form.hidden_field :food_id, value: @food.id %>
         <%= form.hidden_field :total_cost, value: @food.inital_cost %>
 
-        <label for="food_modifications">Food Modifications:</label>
-        <%= form.text_field :food_modifications, id: "food_modifications_#{@food.id}" %>
+        <% data = eval(@food.food_additions) rescue [] %>
+        <% additions = data.is_a?(Array) ? data : [data] %>
+        <% additions.each do |addition| %>
+            <h4><%= form.check_box :food_modifications %> <%= addition['addition_name'] %> $<%= addition['cost'] %></h4>
+        <% end %>
+
         <%= form.submit "Add to Order", class: "btn btn-primary" %>
-<% end %>
-      
-<% data = eval(fooditem.food_additions) rescue [] %>
-<% additions = data.is_a?(Array) ? data : [data] %>
-<% additions.each do |addition| %>
-    <h4>ID: <%= addition['id'] %>, Name: <%= addition['addition_name'] %>, Cost: <%= addition['cost'] %></h4>
 <% end %>
