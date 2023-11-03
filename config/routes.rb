@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :customers
   resources :employee
+  resources :employees
   resources :additions
   resources :foods
   resources :temp_orders
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   post 'addingNewFood', to: 'employee#addingFood'
   get 'confirmation', to: 'menu#confirmation', as: 'order_confirmation'
   get 'orderingMenu', to: 'menu#orderingMenu', as: 'ordering_menu'
+  get 'admin', to: 'employees#admin', as: 'admin_page'
 
   Rails.application.routes.draw do
     get 'menu/show/:id', to: 'menu#show', as: 'menu_show' # Define a route for showing food details

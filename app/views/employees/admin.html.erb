@@ -1,0 +1,21 @@
+<%= form_for Employee.new, url: employees_path do |f| %>
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= f.label :authorization_key %>
+    <%= f.text_field :authorization_key %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Create Employee' %>
+  </div>
+<% end %>
