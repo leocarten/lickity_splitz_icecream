@@ -1,6 +1,6 @@
-class EmployeeController < ApplicationController
+class EmployeesController < ApplicationController
 
-    def login
+    def home
         @employee = Employee.new
         @addition = Addition.new
         @additions = Addition.all
@@ -9,7 +9,6 @@ class EmployeeController < ApplicationController
         @temp_orders = TempOrder.all
         @orders = Order.all
         @order = Order.new
-        #reset_session #This can be used to completly reset the session// This can fix cookie errors
     end
 
     def addition #This is how we are storing each addition into an array before we add it to the food item
@@ -34,12 +33,51 @@ class EmployeeController < ApplicationController
             render root_url
         end
     end
-    
-      
 
-    private
-    def employee_params
-        params.require(:employees).permit(:username, :password, :phone_number, :authorization_key)
+    def admin
+        session[:isCompleted] ||= true
+        @employee = Employee.new
     end
 
+    def orders
+        puts session[:isCompleted]
+        @orders = Order.all
+        @order = Order.new
+    end
+
+    def completingOrder
+        @order = Order.find(params[:id])
+      
+        # Use a 3-way toggle for completed_order
+        @order.completed_order = case @order.completed_order
+        when 0 then 1
+        when 1 then 2
+        else 1
+        end
+      
+        if @order.save
+          redirect_to orders_path, notice: "Order updated successfully."
+        else
+          render :edit
+        end
+    end
+    
+    def create
+        @employee = Employee.new(employee_params)
+        if @employee.save
+          redirect_to  employees_home_url
+        else
+          render 'home'
+        end
+    end
+      
+    private
+    def employee_params
+        params.require(:employee).permit(:username, :password, :phone_number, :authorization_key)
+    end   
+
+    private
+    def order_params
+        params.require(:order).permit(:completed_order)
+    end
 end

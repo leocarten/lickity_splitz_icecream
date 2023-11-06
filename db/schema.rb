@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_180613) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_142913) do
   create_table "additions", force: :cascade do |t|
     t.string "addition_name"
     t.float "cost"
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_180613) do
     t.float "inital_cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "isBreakfast"
   end
 
   create_table "orders", force: :cascade do |t|
