@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :food_tags
 
   #The Home Page of the website
-  root 'pages#home'
+  root 'pages#home' 
 
   #Employee Routes
   get 'n1e2w3E4m5p6l7o8y9e0R1e2g3i4s5t6e7r8', to: 'employees#admin', as: 'employees_login' #Adding New Employees
