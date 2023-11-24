@@ -27,6 +27,8 @@ class EmployeesController < ApplicationController
         username = params[:username]
         password = params[:password]
         employee = Employee.find_by(username: username, password: password)
+        puts "================================="
+        puts employee
         if !employee.nil?
             session[:employee] = employee
             session[:authorization_key] = employee.authorization_key
@@ -92,6 +94,9 @@ class EmployeesController < ApplicationController
         puts session[:isCompleted]
         @orders = Order.all
         @order = Order.new
+        if session[:employee].blank? || session[:employee].nil?
+            redirect_to employees_admin_login_url
+        end
     end
 
     def changingTag
