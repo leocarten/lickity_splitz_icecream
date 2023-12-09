@@ -66,7 +66,9 @@
             <% end %>
       </div>
 
-      <script>
+    <%
+=begin%>
+ <script>
           document.getElementById('open_customer_view').addEventListener('click', function () {
             document.getElementById('customer_view_overlay').style.display = 'flex';
         });
@@ -77,8 +79,9 @@
         document.getElementById('close_customer').addEventListener('click', function () {
             document.getElementById('customer_view_overlay').style.display = 'none';
         });
-      </script>
-
+      </script> 
+<%
+=end%>
       <%# mobile button goes here %>
       <div class="flex items-center md:hidden">
         <button id="toggleButton" class="mobile-menu-button">
