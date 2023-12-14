@@ -120,11 +120,18 @@
                 <% if additions.any? %>
                 <p class="mt-2">Additions:</p>
                 <div id="checkboxes">
-                    <% additions.each do |addition| %>
-                    <h4 class="">
-                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] } %>
-                        <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
-                    </h4>
+                     <% additions.each do |addition| %>
+                        <div id = "checkboxes">
+                            <h4 class="mt-4">
+                                <% if addition['isRadioButton'] == true %>
+                                    <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                    <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                <% else %>
+                                    <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                    <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                <% end %>
+                            </h4>
+                        </div>
                     <% end %>
                 </div>
                 <br>
@@ -211,8 +218,13 @@
                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -288,11 +300,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -369,11 +386,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -450,11 +472,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -766,7 +793,6 @@
         var totalCost = document.getElementById("food_total_cost_");
         var cost = 0
         additionsAdded = [];
-        document.addEventListener('DOMContentLoaded', function() {
 
         document.querySelectorAll('.popup-trigger').forEach(function(button) {
             button.addEventListener('click', function() {
@@ -831,7 +857,6 @@
                 label.value = additionsAdded;
             });
         });
-    });
     </script>
             </details>
         <% end %>
@@ -1374,11 +1399,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -1936,11 +1966,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -2016,11 +2051,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -2097,11 +2137,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -2178,11 +2223,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -2257,16 +2307,16 @@
                                         <% data = eval(food.food_additions) rescue [] %>
                                         <% additions = data.is_a?(Array) ? data : [data] %>
                                         <% if additions.any?%>
-                                            <% additions.each do |addition| %>
+                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                            <% if addition['isRadioButton'] == true %>
-                                                                <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { cost: addition['cost'] } %>
-                                                                <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
-                                                            <% else %>
-                                                                <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { cost: addition['cost'] }%>
-                                                                <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
-                                                            <% end %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -2305,7 +2355,6 @@
                                 </div>
                             </div>
                         </li>
-
                     <% drinks_counter += 1 %>
                     <% if drinks_counter != drinks_items_count %>
                         <hr class="quick_options" style="border-color: #E2E0DF !important;">
@@ -2319,28 +2368,75 @@
     </div>
 
 <script>
-  document.querySelectorAll('.popup-trigger').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var popupId = this.dataset.popupId;
-      document.querySelector('.overlay.overlay_' + popupId).style.display = 'flex';
-    });
-  });
+//var outputTextarea = document.getElementById("selected-additions-output-");
+        var label = document.getElementById("food_modifications_textbox_");
+        var totalCost = document.getElementById("food_total_cost_");
+        var cost = 0
+        additionsAdded = [];
 
-  document.querySelectorAll('.closePopup').forEach(function (closeButton) {
-    closeButton.addEventListener('click', function () {
-      document.querySelectorAll('.overlay').forEach(function (overlay) {
-        overlay.style.display = 'none';
-      });
-    });
-  });
+        document.querySelectorAll('.popup-trigger').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var popupId = this.dataset.popupId;
+                document.querySelector('.overlay.overlay_' + popupId).style.display = 'flex';
+                //outputTextarea = document.getElementById("selected-additions-output-" + popupId);
+                label = document.getElementById("food_modifications_textbox_"  + popupId);
+                totalCost = document.getElementById("food_total_cost_" + popupId);
+                cost = Number(totalCost.value);
+                additionsAdded = [];
+            });
+        });
 
-  document.querySelectorAll('.cancel').forEach(function (cancelButton) {
-    cancelButton.addEventListener('click', function () {
-      document.querySelectorAll('.overlay').forEach(function (overlay) {
-        overlay.style.display = 'none';
-      });
-    });
-  });
+        document.querySelectorAll('.closePopup, .cancel').forEach(function(closeButton) {
+            closeButton.addEventListener('click', function() {
+                document.querySelectorAll('.overlay').forEach(function(overlay) {
+                    overlay.style.display = 'none';
+                    additionsAdded = "";
+                });
+            });
+        });
+
+        //Adding and Removing CheckBoxes 
+        document.querySelectorAll('.food-addition-checkbox').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    if(!additionsAdded.includes(this.dataset.additionname)){
+                        additionsAdded.push(this.name);
+                        cost += Number(this.dataset.cost);
+                    }
+                }
+                else{
+                    var index = additionsAdded.indexOf(this.name);
+                    if (index !== -1) {
+                        additionsAdded.splice(index, 1);
+                    }
+                    cost -= Number(this.dataset.cost);
+                }
+                totalCost.value = cost.toString();
+                //outputTextarea.value = additionsAdded;
+                label.value = additionsAdded;
+            });
+        });
+        document.querySelectorAll('.food-addition-radio').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (radio.checked) {
+                    console.log(this.dataset.additionname);
+                    if(!additionsAdded.includes(this.dataset.additionname)){
+                        additionsAdded.push(this.dataset.additionname);
+                        cost += Number(this.dataset.cost);
+                    }
+                }
+                else{
+                    var index = additionsAdded.indexOf(this.name);
+                    if (index !== -1) {
+                        additionsAdded.splice(index, 1);
+                    }
+                    cost -= Number(this.dataset.cost);
+                }
+                totalCost.value = cost.toString();
+                //outputTextarea.value = additionsAdded;
+                label.value = additionsAdded;
+            });
+        });
 </script>
 
 
