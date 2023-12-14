@@ -154,7 +154,7 @@
 <h2>Delete Tags [This action will delete all foods with this tag]</h2>
   
 
-  <div class="h-screen flex items-center justify-center">
+  <div class="flex items-center justify-center">
     <h1><span class="relative text-center" style="font-family:Lilita One"> Tags: </span></h1>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -173,7 +173,7 @@
     <% end %>
   </div>
 
-  <div class="h-screen flex items-center justify-center">
+  <div class=" flex items-center justify-center">
     <h1><span class="relative text-center" style="font-family:Lilita One"> Additions: </span></h1>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -213,7 +213,7 @@
               <p>Food Modifications:</p>
               <% additions.each do |addition| %>
               <% if addition %>
-                <p>ID: <%= addition['id'] %>, Name: <%= addition['addition_name'] %>, Cost: <%= addition['cost'] %></p>
+                <p> Name: <%= addition['addition_name'] %>, Cost: <%= addition['cost'] %></p>
               <% else %>
                 <p>Addition is nil - What to do ?</p>
               <% end %>              
