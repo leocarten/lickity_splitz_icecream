@@ -36,7 +36,6 @@
 
 <textarea readonly rows="5" class="w-full bg-white border p-2 mt-4" id="selected-additions-output"></textarea>
 
-<h1>TESTING #NOTE DO ADDITIONS BEFORE DOING</h1>
 <%= form_tag updatingFoodAdditions_path, method: :post do %>
   <%= hidden_field_tag :id, @food.id %>
   <%= text_field_tag 'foodAdditions', nil, id: "food_modifications_textbox" %>
@@ -45,7 +44,6 @@
 
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     var outputTextarea = document.getElementById("selected-additions-output");
     var label = document.getElementById("food_modifications_textbox");
@@ -71,7 +69,6 @@
       });
     });
     console.log(label.value);
-  });
 </script>
 
 
