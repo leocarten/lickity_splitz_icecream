@@ -88,8 +88,13 @@
                                             <% additions.each do |addition| %>
                                                 <div id = "checkboxes">
                                                     <h4 class="mt-4">
-                                                        <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox rounded-full h-8 w-8 cursor-pointer bg-black-100 border-black-200 text-blue-500 focus:ring-blue-200', data: { cost: addition['cost'] }%>
-                                                        <%= label_tag addition['addition_name'] + " $" + addition['cost'].to_s %>
+                                                        <% if addition['isRadioButton'] == true %>
+                                                            <%= radio_button_tag "Decision", addition['cost'], false, class: 'food-addition-radio', data: { additionName: addition['addition_name'], cost: addition['cost'] } %>
+                                                            <%= label_tag "Decision_#{addition['cost']}", "#{addition['addition_name']} $#{addition['cost']}" %>
+                                                        <% else %>
+                                                            <%= check_box_tag addition['addition_name'], addition['cost'], false, class: 'food-addition-checkbox', data: { additionName: addition['addition_name'], cost: addition['cost'] }%>
+                                                            <%= label_tag addition['addition_name'] + " $" + sprintf('%.2f', addition['cost']) %>
+                                                        <% end %>
                                                     </h4>
                                                 </div>
                                             <% end %>
@@ -107,14 +112,17 @@
                                             </button>
                                             <div style="width: 10px;"></div>
 
-                                            <%= form_with(model: TempOrder.new, method: :post) do |form| %>
+                                             <%= form_with(model: TempOrder.new, method: :post) do |form| %>
                                                 <button class="bg-green-600 rounded-full w-32 h-11 text-white font-semibold">
                                                     <div class="flex gap-4 justify-center items-center">
-                                                        <span><i class="fa fa-check"></i></span>
+                                                        <span>
+                                                            <i class="fa fa-check"></i>
+                                                        </span>
                                                         <% if session[:customer].present? %>
                                                             <%= form.hidden_field :customer_id, value: session[:customer]['id'] %>
+                                                            <%= form.hidden_field :food_modifications, value: "", id: "food_modifications_textbox_#{id}" %>
                                                             <%= form.hidden_field :food_id, value: food.id %>
-                                                            <%= form.hidden_field :total_cost, value: food.inital_cost %>
+                                                            <%= form.hidden_field :total_cost, value: food.inital_cost, id: "food_total_cost_#{id}" %>
                                                             <span><%= form.submit "Confirm" %></span>
                                                         <% end %>
                                                     </div>
@@ -130,26 +138,74 @@
             <% end %>
 </div>
 <script>
-    document.querySelectorAll('.popup-trigger').forEach(function (button) {
-        button.addEventListener('click', function () {
-        var popupId = this.dataset.popupId;
-        document.querySelector('.overlay.overlay_' + popupId).style.display = 'flex';
-        });
-    });
+    var label = document.getElementById("food_modifications_textbox_");
+    var totalCost = document.getElementById("food_total_cost_");
+    var previousRadioButton = null;
+    var cost = 0
+    console.log("FUCK THIS STUPID SHIT");
+    additionsAdded = [];
+    document.addEventListener('DOMContentLoaded', function() {
 
-    document.querySelectorAll('.closePopup').forEach(function (closeButton) {
-        closeButton.addEventListener('click', function () {
-        document.querySelectorAll('.overlay').forEach(function (overlay) {
-            overlay.style.display = 'none';
+        document.querySelectorAll('.popup-trigger').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var popupId = this.dataset.popupId;
+                document.querySelector('.overlay.overlay_' + popupId).style.display = 'flex';
+                label = document.getElementById("food_modifications_textbox_"  + popupId);
+                totalCost = document.getElementById("food_total_cost_" + popupId);
+                cost = Number(totalCost.value);
+                additionsAdded = [];
+            });
         });
-        });
-    });
 
-    document.querySelectorAll('.cancel').forEach(function (cancelButton) {
-        cancelButton.addEventListener('click', function () {
-        document.querySelectorAll('.overlay').forEach(function (overlay) {
-            overlay.style.display = 'none';
+        document.querySelectorAll('.closePopup, .cancel').forEach(function(closeButton) {
+            closeButton.addEventListener('click', function() {
+                document.querySelectorAll('.overlay').forEach(function(overlay) {
+                    overlay.style.display = 'none';
+                    additionsAdded = "";
+                });
+            });
         });
+
+        document.querySelectorAll('.food-addition-checkbox').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                console.log("THIS IS A CHECKBOX");
+                if (this.checked) {
+                    if(!additionsAdded.includes(this.dataset.additionname)){
+                        additionsAdded.push(this.name);
+                        cost += Number(this.dataset.cost);
+                    }
+                }
+                else{
+                    var index = additionsAdded.indexOf(this.name);
+                    if (index !== -1) {
+                        additionsAdded.splice(index, 1);
+                    }
+                    cost -= Number(this.dataset.cost);
+                }
+                totalCost.value = cost.toString();
+                label.value = additionsAdded;
+            });
+        });
+        document.querySelectorAll('.food-addition-radio').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                if (previousRadioButton != this){
+                    if(previousRadioButton == null){
+                        additionsAdded.push(this.dataset.additionname);
+                        cost += Number(this.dataset.cost);
+                    }
+                    else if(previousRadioButton != this){
+                        var index = additionsAdded.indexOf(this.name);
+                        additionsAdded.splice(index, 1);
+                        cost -= Number(previousRadioButton.dataset.cost);
+                        additionsAdded.push(this.dataset.additionname);
+                        cost += Number(this.dataset.cost);
+                    }
+
+                }
+                totalCost.value = cost.toString();
+                label.value = additionsAdded;
+                previousRadioButton = this;
+            });
         });
     });
 </script>
@@ -167,7 +223,6 @@
         align-items: center;
     }
 
-    /* Styles for the scrollable popup content */
     .popup-container {
         max-height: 80vh;
         overflow-y: auto;
@@ -180,9 +235,7 @@
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
     </style>
-    <!-- The popup overlay -->
     <div id="customer_view_overlay" class="overlay">
-    <!-- The popup content -->
      <div class="popup-container">
     <div class="popup">
         <button id="close_customer_view" style="padding-left:300px"><i class="fa fa-window-close" style="font-size: 24px;color:#F0512F;"></i></button>
@@ -250,19 +303,7 @@
     </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
 <script>
-    // JavaScript to handle the popup
     document.getElementById('open_customer_view').addEventListener('click', function () {
         document.getElementById('customer_view_overlay').style.display = 'flex';
     });
