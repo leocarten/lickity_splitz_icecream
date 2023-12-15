@@ -1,7 +1,15 @@
 <% @include_prose_class = true %>
+<h2 style="padding-top:30px; padding-left: 50px">Admin Login</h2>
+<%= form_tag checkCredentials_path, method: :post, class: "max-w-sm mx-auto my-4" do %>
+  <div class="mb-4">
+    <%= label_tag :username, "Username", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= text_field_tag :username, nil, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
 
-<%= form_tag checkCredentials_path, method: :post do %>
-    <%= text_field_tag :username %>
-    <%= text_field_tag :password %>
-    <%= submit_tag "Log-In", class: "bg-blue-500 text-white p-2 rounded" %>
+  <div class="mb-6">
+    <%= label_tag :password, "Password", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= password_field_tag :password, nil, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <%= submit_tag "Log-In", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
 <% end %>
