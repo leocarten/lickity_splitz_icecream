@@ -26,7 +26,9 @@
 </div>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-
+<div style="padding-left:50px">
+    <%= link_to "View Completed Orders", employees_old_orders_url, class: "py-2 px-4 bg-cyan-500 text-white font-semibold rounded-lg hover:bg-cyan-700 hover:text-gray-100 focus:outline-none focus:ring focus:border-blue-300"%>
+</div>
 <!--
 <section class="py-8">
     <div class="container mx-auto text-center px-4">
@@ -172,4 +174,3 @@
     </div>
   <% end %>
 </div>
-<%= link_to "Older Orders", employees_old_orders_url , class: "py-4 px-3 text-gray-700 hover:text-gray-900" %>
