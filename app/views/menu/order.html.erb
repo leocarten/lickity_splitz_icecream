@@ -250,7 +250,8 @@ Savor the taste of homemade ice cream with our delightful menu. From classic fav
                 <% end %>
             <% end %>
         <% end %>
-
+        <h4>Food Cost: $<%= number_with_precision(@total, precision: 2) %></h4>
+        <h4>Tax Cost: $<%= number_with_precision(@total*0.07, precision: 2) %></h4>
         <p style="padding-bottom:10px;"><span style="font-weight:bold">Total price:</span> $<%= number_with_precision(@total, precision: 2) %></p>
 
         <div class="flex gap-6">
