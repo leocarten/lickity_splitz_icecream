@@ -117,6 +117,52 @@
     <% end %>
   </div>
 
+      <script>
+    // JavaScript to handle the popup
+    document.getElementById('open_customer_view').addEventListener('click', function () {
+        document.getElementById('customer_view_overlay').style.display = 'flex';
+    });
+
+    document.getElementById('close_customer_view').addEventListener('click', function () {
+        document.getElementById('customer_view_overlay').style.display = 'none';
+    });
+    document.getElementById('close_customer').addEventListener('click', function () {
+        document.getElementById('customer_view_overlay').style.display = 'none';
+    });
+    </script>
+
+  <script>
+  // Function to toggle the visibility of the mobile menu
+  function toggleMobileMenu() {
+    var mobileMenu = document.getElementById('mobileMenu');
+    mobileMenu.classList.toggle('hidden');
+  }
+
+  // Function to check the screen size and toggle the mobile menu accordingly
+  function checkScreenSize() {
+    var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    // Adjust the screen width value based on your design breakpoints
+    var mobileBreakpoint = 768;
+
+    // Check if the screen is smaller than the mobile breakpoint
+    if (screenWidth < mobileBreakpoint) {
+      toggleMobileMenu();
+    } else {
+      // Ensure the mobile menu is hidden when the screen is wider
+      var mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.add('hidden');
+    }
+  }
+
+  // Attach the checkScreenSize function to the window resize event
+  window.addEventListener('resize', checkScreenSize);
+
+  // Initial check when the page loads
+  checkScreenSize();
+</script>
+
+
     <script>
     const btn = document.querySelector('button.mobile-menu-button');
     const menu = document.querySelector('.mobile-menu');

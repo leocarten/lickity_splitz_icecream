@@ -797,6 +797,7 @@
         //var outputTextarea = document.getElementById("selected-additions-output-");
         var label = document.getElementById("food_modifications_textbox_");
         var totalCost = document.getElementById("food_total_cost_");
+        var previousRadioButton = null;
         var cost = 0
         additionsAdded = [];
         console.log("THIS SHOULDNT BE SELECTED")
@@ -847,23 +848,23 @@
         });
         document.querySelectorAll('.food-addition-radio').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                if (radio.checked) {
-                    console.log(this.dataset.additionname);
-                    if(!additionsAdded.includes(this.dataset.additionname)){
+                if (previousRadioButton != this){
+                    if(previousRadioButton == null){
                         additionsAdded.push(this.dataset.additionname);
                         cost += Number(this.dataset.cost);
                     }
-                }
-                else{
-                    var index = additionsAdded.indexOf(this.name);
-                    if (index !== -1) {
+                    else if(previousRadioButton != this){
+                        var index = additionsAdded.indexOf(this.name);
                         additionsAdded.splice(index, 1);
+                        cost -= Number(previousRadioButton.dataset.cost);
+                        additionsAdded.push(this.dataset.additionname);
+                        cost += Number(this.dataset.cost);
                     }
-                    cost -= Number(this.dataset.cost);
+
                 }
                 totalCost.value = cost.toString();
-                //outputTextarea.value = additionsAdded;
                 label.value = additionsAdded;
+                previousRadioButton = this;
             });
         });
     </script>
@@ -1572,6 +1573,7 @@
 //var outputTextarea = document.getElementById("selected-additions-output-");
         var label = document.getElementById("food_modifications_textbox_");
         var totalCost = document.getElementById("food_total_cost_");
+        var previousRadioButton = null;
         var cost = 0
         additionsAdded = [];
 
@@ -1620,23 +1622,23 @@
         });
         document.querySelectorAll('.food-addition-radio').forEach(function(radio) {
             radio.addEventListener('change', function() {
-                if (radio.checked) {
-                    console.log(this.dataset.additionname);
-                    if(!additionsAdded.includes(this.dataset.additionname)){
+                if (previousRadioButton != this){
+                    if(previousRadioButton == null){
                         additionsAdded.push(this.dataset.additionname);
                         cost += Number(this.dataset.cost);
                     }
-                }
-                else{
-                    var index = additionsAdded.indexOf(this.name);
-                    if (index !== -1) {
+                    else if(previousRadioButton != this){
+                        var index = additionsAdded.indexOf(this.name);
                         additionsAdded.splice(index, 1);
+                        cost -= Number(previousRadioButton.dataset.cost);
+                        additionsAdded.push(this.dataset.additionname);
+                        cost += Number(this.dataset.cost);
                     }
-                    cost -= Number(this.dataset.cost);
+
                 }
                 totalCost.value = cost.toString();
-                //outputTextarea.value = additionsAdded;
                 label.value = additionsAdded;
+                previousRadioButton = this;
             });
         });
 </script>
